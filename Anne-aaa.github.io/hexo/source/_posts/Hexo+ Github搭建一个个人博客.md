@@ -1,5 +1,5 @@
 ---
-title: blog
+title: Hexo+ Github搭建一个个人博客
 date: 2024-05-21 15:18:47
 tags: 日常记录
 ---
