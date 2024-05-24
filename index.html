@@ -98,18 +98,138 @@
 <h3 id="二-过程中遇到的问题"><a href="#二-过程中遇到的问题" class="headerlink" title="二. 过程中遇到的问题"></a>二. 过程中遇到的问题</h3><p>电脑是mac 系统是zshrc，环境变量文件是.zshrc</p>
 <p>环境变量最后一行写的是pnpm 所以我得用pnpm安装，才能识别到这个command</p>
 <h3 id="三-日常改动："><a href="#三-日常改动：" class="headerlink" title="三. 日常改动："></a>三. 日常改动：</h3><ol>
-<li>直接把.md文件复制到source&#x2F;_post文件夹中，复制完之后然后使用文本编辑器打开它，在第一行加上title。 也可以直接 hexo new 一篇博客</li>
+<li>直接把.md文件复制到source&#x2F;_post文件夹中，复制完之后然后使用文本编辑器打开它，在第一行加上title。 也可以直接 hexo new 一篇博客。 图片放在source&#x2F;images文件夹中，md文档内，使用<img src="/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="图片" title="图片title">的格式，圆括号内的链接地址写(&#x2F;images&#x2F;name.jpeg)。<br>这里的 &#x2F; 指的是根目录，对于hexo，资源文件的根目录就是source。</li>
 <li>在.git目录下，依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo</li>
-<li>要进入hexo跟目录（和_config.yml同一目录下），删除旧的静态文件，即 public 文件<br>hexo clean。 然后才执行 hexo d -g 生成静态文件并部署到远程服务器,到master分支上。 需要等待一会才能见到。</li>
+<li>要进入hexo跟目录（和_config.yml同一目录下），删除旧的静态文件，即 public 文件<br>hexo clean。 然后才执行 hexo d -g 生成静态文件并部署到远程服务器,到master分支上。 需要等待一会才能见到。<br>hexo s可以先在本地预览。</li>
 </ol>
-<p>hexo s可以先在本地预览。</p>
 <p>注意问题1.</p>
 <p>如果你在运行<code>hexo</code>命令时出现了<code>Usage</code>提示而无法执行后面的子命令, 很可能是因为你当前所在的目录不是 Hexo 站点的根目录。Hexo 需要在站点根目录下才能正确执行命令。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="clwg3gchv00033jpoh3lygvlp" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="clwke7hyi0000xwpo79aeec8y" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" rel="tag">日常记录</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-backend/架构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/21/backend/%E6%9E%B6%E6%9E%84/" class="article-date">
+  <time class="dt-published" datetime="2024-05-21T07:18:47.000Z" itemprop="datePublished">2024-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/21/backend/%E6%9E%B6%E6%9E%84/">Hexo+ Github搭建一个个人博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="经典三层架构"><a href="#经典三层架构" class="headerlink" title="经典三层架构"></a>经典三层架构</h3><h3 id="DDD分层架构"><a href="#DDD分层架构" class="headerlink" title="DDD分层架构"></a>DDD分层架构</h3><p>其实之前项目上用的就是DDD，但是到今天我才从全貌去理解它，用一个订单系统举例子。 一个订单会包含多个订单项，订单的总金额需要是订单项金额的累计，因此 Order 与 OrderLine不应是两个单独的类，  用 <code>Aggregate</code> 这一概念来写Order， 外部通过Order来改OrderLine，避免错误。</p>
+<p>也就是说，聚合根的存在是为了： 外部对象只能通过聚合根来访问和修改聚合内部的数据。现在再回到这个架构的名字：领域驱动开发</p>
+<p><strong>包位置： domain</strong></p>
+<p>包位置： domain&#x2F;models</p>
+<p>Entity</p>
+<ul>
+<li>Order</li>
+<li>OrderLine</li>
+</ul>
+<p>Value Object（属性描述）</p>
+<ul>
+<li>EffectivePeriod</li>
+<li>Address</li>
+</ul>
+<p>Aggregate Root ： 它定义了一个聚合(Aggregate)的边界,并作为外部对象访问和修改聚合内部对象的唯一入口。</p>
+<ul>
+<li>InterestRateRequest 可以理解成OrderAggregate</li>
+</ul>
+<p>Domain Service (领域层服务专注于实现核心的业务逻辑)</p>
+<p>包位置： domain&#x2F;service</p>
+<ul>
+<li>OrderService</li>
+</ul>
+<p>包位置： domain&#x2F;repository</p>
+<ul>
+<li>InterestRateRepository</li>
+</ul>
+<p>其实关于这一层，我忘记了当时项目上用的聚合根的场景了。还有关于领域服务，我们项目上似乎是没有领域服务的，业务逻辑都是写在应用层的。 只能说这里再之后多看看代码，具体场景具体分析了。这里我有的用了一些之前项目上的代码，已经经过脱敏处理。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> OrderId id;</span><br><span class="line">    <span class="keyword">private</span> List&lt;OrderLine&gt; orderLines;</span><br><span class="line">    <span class="keyword">private</span> Money totalAmount;</span><br><span class="line">    <span class="keyword">private</span> Address shippingAddress;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addOrderLine</span><span class="params">(OrderLine orderLine)</span> &#123;</span><br><span class="line">        <span class="comment">// 添加订单项</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">calculateTotalAmount</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 计算订单总金额</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>聚合根：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">AggregateRoot</span>&lt;<span class="type">T : AggregateRoot&lt;T</span>&gt;&gt; &#123;</span><br><span class="line">  <span class="keyword">val</span> id: Id&lt;T&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">InterestRateRequest</span>(</span><br><span class="line">  <span class="keyword">val</span> effectivePeriod: String,</span><br><span class="line">  <span class="keyword">val</span> rate: BigDecimal,</span><br><span class="line">  <span class="keyword">override</span> <span class="keyword">val</span> id: String</span><br><span class="line">) : AggregateRoot&lt;InterestRateRequest&gt; &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">companion</span> <span class="keyword">object</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">val</span> log = LoggerFactory.getLogger(InterestRateRequest::<span class="keyword">class</span>.java)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">fun</span> <span class="title">create</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">      rate: <span class="type">BigDecimal</span>,</span></span></span><br><span class="line"><span class="params"><span class="function">    )</span></span>: InterestRateRequest &#123;</span><br><span class="line">      <span class="keyword">if</span> (...) &#123;</span><br><span class="line">        log.warn(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">        <span class="keyword">throw</span> BusinessException(</span><br><span class="line">          <span class="string">&quot;XXX&quot;</span>,</span><br><span class="line">          <span class="string">&quot;effective period is not match last one&quot;</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (rate &gt; RATE_UPPER_LIMIT || rate &lt; RATE_LOWER_LIMIT) &#123;</span><br><span class="line">        log.warn(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">        <span class="keyword">throw</span> BusinessException(</span><br><span class="line">          <span class="string">&quot;AAA&quot;</span>,</span><br><span class="line">          <span class="string">&quot;interest rate not input more than 100% or less than 0%&quot;</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">val</span> startOfTomorrow = LocalDate.now().atStartOfDay().plusDays(<span class="number">1</span>)</span><br><span class="line">      <span class="keyword">if</span> (approvedOn.isBefore(startOfTomorrow)) &#123;</span><br><span class="line">        log.warn(<span class="string">&quot;...&quot;</span>)</span><br><span class="line">        <span class="keyword">throw</span> BusinessException(</span><br><span class="line">          <span class="string">&quot;BBB&quot;</span>,</span><br><span class="line">          <span class="string">&quot;approved on must be after tomorrow and beyond&quot;</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> InterestRateRequest(</span><br><span class="line">        effectivePeriod = <span class="string">&quot;effectivePeriod&quot;</span>,</span><br><span class="line">        id = <span class="string">&quot;id&quot;</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下单和支付的核心业务逻辑</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OrderService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">placeOrder</span><span class="params">(OrderAggregate orderAggregate, PaymentDetails paymentDetails)</span> &#123;</span><br><span class="line">        <span class="comment">// 执行下单业务逻辑</span></span><br><span class="line">        <span class="type">Order</span> <span class="variable">order</span> <span class="operator">=</span> orderAggregate.getOrder();</span><br><span class="line">        order.setStatus(OrderStatus.PLACED);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 执行支付逻辑</span></span><br><span class="line">        processPayment(order, paymentDetails);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 其他下单相关的业务逻辑</span></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">processPayment</span><span class="params">(Order order, PaymentDetails paymentDetails)</span> &#123;</span><br><span class="line">        <span class="comment">// 调用支付网关进行支付</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">paymentSuccessful</span> <span class="operator">=</span> callPaymentGateway(order, paymentDetails);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (paymentSuccessful) &#123;</span><br><span class="line">            order.setStatus(OrderStatus.PAID);</span><br><span class="line">            <span class="comment">// 执行其他支付成功后的逻辑</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            order.setStatus(OrderStatus.PAYMENT_FAILED);</span><br><span class="line">            <span class="comment">// 执行支付失败后的逻辑</span></span><br><span class="line">            <span class="comment">// ...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">FileRepository</span> &#123;</span><br><span class="line">  fun <span class="title function_">save</span><span class="params">(file: File)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>包位置：application</p>
+<ul>
+<li>PlaceOrderService   （之前在项目组用UseCase代替这里的Service）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PlaceOrderService</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderService orderService;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> OrderRepository orderRepository;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">PlaceOrderService</span><span class="params">(OrderService orderService, OrderRepository orderRepository)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.orderService = orderService;</span><br><span class="line">        <span class="built_in">this</span>.orderRepository = orderRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Transactional</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">placeOrder</span><span class="params">(PlaceOrderRequest request)</span> &#123;</span><br><span class="line">        <span class="type">OrderId</span> <span class="variable">orderId</span> <span class="operator">=</span> OrderId.next();</span><br><span class="line">        <span class="type">OrderAggregate</span> <span class="variable">orderAggregate</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OrderAggregate</span>(orderId);</span><br><span class="line">        orderAggregate.setShippingAddress(request.getShippingAddress());</span><br><span class="line">        request.getOrderLines().forEach(ol -&gt; orderAggregate.addOrderLine(ol.getProduct(), ol.getQuantity()));</span><br><span class="line">        orderAggregate.submitOrder();</span><br><span class="line"></span><br><span class="line">        orderService.placeOrder(orderAggregate, request.getPaymentDetails());</span><br><span class="line"></span><br><span class="line">        orderRepository.save(orderAggregate);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>包位置： infrastructure</p>
+<p>包位置： infrastructure&#x2F;repository</p>
+<ul>
+<li>JooqInterestRateRequestRepository</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Repository</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">JooqInterestRateRequestRepository</span>(</span><br><span class="line">  <span class="keyword">private</span> val dslContext: DSLContext,</span><br><span class="line">) : InterestRateRequestRepository &#123;</span><br><span class="line">  <span class="type">val</span> <span class="variable">mapper</span> <span class="operator">=</span> MapperUtils.getMapper&lt;InterestRateRequestMapper&gt;()</span><br><span class="line"></span><br><span class="line">  override fun <span class="title function_">save</span><span class="params">(interestRateRequest: InterestRateRequest)</span> &#123;</span><br><span class="line">    mapper</span><br><span class="line">      .convertToRecord(interestRateRequest, dslContext.newRecord(PT_INTEREST_RATE_REQUEST))</span><br><span class="line">      .let &#123; dslContext.batchInsert(it).execute() &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>controller层都是一样的，我就省略不写了。我记得当时有一种情况，如果repository要对整个聚合根进行操作。 如果不是对整个聚合根操作，是放到另一个地方的。例子如下：    并不需要查出来整个聚合根</p>
+<p>包位置: querymodel</p>
+<p>包位置：querymodel&#x2F;repository</p>
+<p>包位置：querymodel&#x2F;condition  所有可能的查询条件组合而成的数据模型</p>
+<ul>
+<li>CaseDocumentsCondition</li>
+</ul>
+<p>包位置：querymodel&#x2F;querymodel  想查出来的数据模型</p>
+<ul>
+<li>CaseDocumentQueryModel</li>
+</ul>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">CaseDocumentQueryModel</span>(</span><br><span class="line">  <span class="keyword">val</span> documentType: CaseDocumentType,</span><br><span class="line">  <span class="keyword">val</span> filename: String,</span><br><span class="line">  <span class="keyword">val</span> uploadedOn: LocalDateTime,</span><br><span class="line">  <span class="keyword">val</span> uploadedBy: UUID,</span><br><span class="line">  <span class="keyword">val</span> usedIn: CasePhase,</span><br><span class="line">  <span class="keyword">val</span> status: CaseDocumentStatus,</span><br><span class="line">  <span class="keyword">val</span> caseDocumentId: UUID</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">data</span> <span class="keyword">class</span> <span class="title class_">CaseDocumentsCondition</span>(</span><br><span class="line">  <span class="keyword">val</span> page: <span class="built_in">Int</span>,</span><br><span class="line">  <span class="keyword">val</span> size: <span class="built_in">Int</span>,</span><br><span class="line">  <span class="keyword">val</span> filenameSearchCondition: String? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> typeSearchCondition: String? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> startUploadedOnSearchCondition: LocalDate? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> uploadedBySearchCondition: String? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> statusSearchCondition: String? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> usedInSearchCondition: String? = <span class="literal">null</span>,</span><br><span class="line">  <span class="keyword">val</span> endUploadedOnSearchCondition: LocalDate? = <span class="literal">null</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">FileInfoQueryRepository</span> &#123;</span><br><span class="line">  <span class="function"><span class="keyword">fun</span> <span class="title">findDocumentBy</span><span class="params">(caseId: <span class="type">UUID</span>, condition: <span class="type">CaseDocumentsCondition</span>)</span></span>: CaseDocumentQueryModel</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Anyway, 项目上的DDD架构看起来会稍微不一样一点。比如domain service没怎么用到，但是domain还会放repository的接口。  聚合根的使用也是如此，好多实体还有一个接口放在domain里面（不知道为啥)。 实体里面是有方法的（比如在request这个实体里，封装了判断rate是否正确，不正确报错，正确才返回真正的实体。  关于这一块，我记得也是有说法的。比如封装到实体里，那么从初始化开始，就不会生成不对的这个实体。 如果把这些判断封装到别的地方，会对逻辑有一些不同的影响）。</p>
+<p>总结来说，DDD比起三层经典架构来说，多了一层domain，来放置抽象的infrastructure层的接口。 现在再看这张图，就觉得更理解一些了：</p>
+<p><img src="/images/DDD1.png" alt="图片" title="Arch"><br>DDD中多的这个domain的包：</p>
+<p>在DDD中,强调建立一种统一的领域语言。在这个例子中,开发团队和银行业务专家需要就”账户”、”存款”、”贷款”等概念达成共识,形成一套统一的术语和定义。例如,他们可能会约定:</p>
+<ul>
+<li>“账户”指的是客户在银行开立的账号,包括存款账户和贷款账户。</li>
+<li>“存款”指的是客户存入银行的资金。</li>
+<li>“贷款”指的是银行向客户发放的借款。</li>
+</ul>
+<p>通过建立这种统一的领域语言,开发人员和业务专家就能够在同一个语义基础上进行交流和讨论,减少理解上的偏差。当开发人员在编写代码时,他们可以直接使用这些约定好的术语,而不需要进行”翻译”。这样一来,代码就能够更好地反映业务领域的概念,从而确保系统符合真实的业务需求。</p>
+<p>【未完待续..】</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://anne-aaa.github.io/2024/05/21/backend/%E6%9E%B6%E6%9E%84/" data-id="clwke7hyq0004xwpo9afthtfl" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -192,7 +312,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-id="clwg3gcho00003jpo4f6f5o5y" data-title="前端项目中遇到的问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-id="clwke7hym0001xwpodilwbjqf" data-title="前端项目中遇到的问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -342,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="clwg3gchs00013jpo2rtx8ewd" data-title="《Spring 4.x 企业应用开发实战》读书笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="clwke7hyp0003xwpohk2091ce" data-title="《Spring 4.x 企业应用开发实战》读书笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -379,7 +499,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">日常记录</a>
+      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 10px;">后端</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" style="font-size: 20px;">日常记录</a>
     </div>
   </div>
 
@@ -402,6 +522,10 @@
         
           <li>
             <a href="/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">Hexo+ Github搭建一个个人博客</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/21/backend/%E6%9E%B6%E6%9E%84/">Hexo+ Github搭建一个个人博客</a>
           </li>
         
           <li>
