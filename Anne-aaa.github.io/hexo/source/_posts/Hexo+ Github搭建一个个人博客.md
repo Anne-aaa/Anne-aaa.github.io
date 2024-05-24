@@ -17,11 +17,11 @@ tags: 日常记录
 
 ### 三. 日常改动：
 
-1. 直接把.md文件复制到source/_post文件夹中，复制完之后然后使用文本编辑器打开它，在第一行加上title。 也可以直接 hexo new 一篇博客
+1. 直接把.md文件复制到source/_post文件夹中，复制完之后然后使用文本编辑器打开它，在第一行加上title。 也可以直接 hexo new 一篇博客。 图片放在source/images文件夹中，md文档内，使用![图片](图片链接地址 "图片title")的格式，圆括号内的链接地址写(/images/name.jpeg)。
+   这里的 / 指的是根目录，对于hexo，资源文件的根目录就是source。
 2. 在.git目录下，依次执行git add .、git commit -m "..."、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo
 3. 要进入hexo跟目录（和_config.yml同一目录下），删除旧的静态文件，即 public 文件
    hexo clean。 然后才执行 hexo d -g 生成静态文件并部署到远程服务器,到master分支上。 需要等待一会才能见到。
-
 hexo s可以先在本地预览。
 
 注意问题1.
