@@ -71,6 +71,256 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-backend/AWS SAA知识点联合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" class="article-date">
+  <time class="dt-published" datetime="2024-06-12T15:33:27.064Z" itemprop="datePublished">2024-06-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/">AWS SAA知识点联合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>今天看了S3和RDS。他们的区别是什么？</li>
+</ol>
+<p>S3 是一种storage， RDS是一种关系型数据库。 都用来存东西，它们的区别是什么？区别是存储的数据类型不一样。S3存储的是非结构化的对象，比如文件、静态网页、视频。    RDS存的是结构化的关系型数据。</p>
+<p>其中都讲到了关于“replica”，S3可以启用versioning，这样只要存的东西有什么改动，都会存下来一个版本。</p>
+<p>RDS则是可以选择性能更高的read Replica，和可用于灾难恢复的multi-AZ Replica     其中同步复制，会让每一个复制品都一样。异步复制则可能来不及变得一样，还是旧版本。我想他们都是创建一个实例来做replica.</p>
+<p>在谈到DB和Storage时，通常有两个指标经常用到： Availibility和Scailibility。Availibility，我对它的理解是可以multi-AZ, 到处使用，可以灾难恢复。而scalibility就是扩容了。</p>
+<p>那EFS也是存文件的，它和S3的区别是什么？ EFS存的文件，是有层次目录结构的。</p>
+<p>EBS只能从EC2访问。数据盘。</p>
+<p>什么时候用EBS？</p>
+<p>这样联合去看：</p>
+<p>场景1.  一家游戏公司正在开发一款手机游戏，该游戏将分数更新流式传输到后端处理器，然后在排行榜上发布结果。</p>
+<p>Amazon EC2 实例涉及多项维护活动，例如管理客户操作系统和部署到客户操作系统的软件，包括更新和安全补丁。</p>
+<p>为了帮助大规模提取实时数据或流数据，您可以使用 Amazon Kinesis Data Streams (KDS)。KDS 可以从数十万个来源每秒连续捕获 GB 的数据。收集的数据可在几毫秒内获得，从而实现实时分析。KDS 提供记录排序，以及以相同顺序读取和&#x2F;或重播记录到多个 Amazon Kinesis 应用程序的功能。</p>
+<p>AWS Lambda 与 Kinesis Data Streams 原生集成。当您使用此原生集成时，轮询、检查点和错误处理的复杂性将被抽象化。然后可以将处理后的数据配置为保存在 Amazon DynamoDB 中。</p>
+<p>这样就不需要用到EC2来部署软件。</p>
+<p>关于“multi-AZ”这个机制，注意是发生失败时，才会failover到另一个区。希望通过手动控制，关掉一个AZ，来转移到另一个AZ是不可行的。因为这个机制一旦开启，就不允许手动停止实例。Aurora和RDS都有这个机制</p>
+<p>关于“read replica”，如果主数据库未加密，则副本也不能加密。</p>
+<h3 id="知识点目录"><a href="#知识点目录" class="headerlink" title="知识点目录"></a>知识点目录</h3><p>Storage:</p>
+<ul>
+<li>S3：对象存储服务<ul>
+<li>S3理论上可以无限扩展,自动分片和重新分片。</li>
+<li>可用于静态网站托管、数据湖、备份归档等</li>
+<li>两种复制方式：   Read Replica   &#x2F;    Multi AZ（灾难恢复）</li>
+</ul>
+</li>
+<li>EBS：<ul>
+<li>支持快照备份,可用于数据库等需要高IOPS的应用</li>
+</ul>
+</li>
+<li>EFS：<ul>
+<li><p>完全托管的<strong>文件存储服务</strong>，</p>
+</li>
+<li><p>多个EC2实例可同时访问和共享文件系统</p>
+</li>
+<li><p>适合大数据、媒体处理、内容管理等需要共享文件系统的应用</p>
+</li>
+</ul>
+</li>
+<li>EC2 Instance Store 其实这个在做report generator的时候有点印象。the best disk I&#x2F;O performance. Risk of data loss if hardware fails       非常适合临时存储频繁更改的信息（例如缓冲区、缓存、临时数据和其他临时内容），或用于在一组实例（例如负载平衡的 Web 服务器池）中复制的数据。实例存储卷包含在实例使用成本中。</li>
+<li>FSx for Windows</li>
+<li>FSx for Lustre 针对需要高性能文件系统和与AWS服务(如S3)集成的数据密集型工作负载<ul>
+<li>可将FSx for Lustre用作热数据存储,存放经常访问的文件,同时利用Amazon S3作为冷数据存储,存放很少访问的文件。</li>
+</ul>
+</li>
+<li>Amazon Athena<ul>
+<li>是AWS提供的一种交互式查询服务,允许您使用标准SQL语句直接分析存储在S3中的数据,无需预先设置任何基础设施。</li>
+</ul>
+</li>
+</ul>
+<p><strong>在 Amazon S3 Standard 上存储测试文件的成本 &lt; 在 Amazon EFS 上存储测试文件的成本 &lt; 在 Amazon EBS 上存储测试文件的成本</strong></p>
+<ul>
+<li>AWS Storage Gateway<ul>
+<li>是一种混合云存储服务，可让您在本地访问几乎无限的云存储。它通过在本地缓存经常访问的数据，同时在 Amazon 云存储服务中安全持久地存储数据，提供低延迟性能。Storage Gateway 通过仅发送更改的数据和压缩数据来优化到 AWS 的数据传输。Storage Gateway 还与 Amazon S3 云存储本地集成，使您的数据可用于云内处理。 (注意：混合云存储服务指的是将本地存储资源(如数据中心或主机托管存储)与公有云存储资源相结合的存储解决方案。 这里以后可能实践能知道吧，我不太清楚具体实现细节。)</li>
+</ul>
+</li>
+</ul>
+<p>Database:</p>
+<ul>
+<li>RDS<ul>
+<li>用来存各种关系型结构的数据。</li>
+</ul>
+</li>
+<li>Dynamo DB<ul>
+<li>AWS特有的数据库，用来存JSON 或者session。</li>
+<li>完全托管的NoSQL键值数据库服务</li>
+<li><strong>Global Tables</strong>:   to serve the data globally. You must enable <em>DynamoDB Streams</em> first to create global table.</li>
+</ul>
+</li>
+<li>Aurora: 完全托管，Mysql, PgSql<ul>
+<li>Aurora Global Database：跨region</li>
+</ul>
+</li>
+<li>Redshift<ul>
+<li>列式存储,支持大规模并行处理(MPP)</li>
+<li>适合大数据分析、OLAP、机器学习等。专为大规模数据集存储和分析而设计。（PB级别）</li>
+<li>使用场景： 结合Redshift Spectrum,可直接分析存储在S3数据湖中的结构化和半结构化数据。</li>
+</ul>
+</li>
+<li>ElasticCache： 为Redis和Memcached提供cache, 提高性能</li>
+<li>Neptune : 存族谱这种图</li>
+<li>EMR:<ul>
+<li>托管的大数据处理平台,支持Hadoop、Spark等开源框架。</li>
+<li><strong>Use case:</strong> Analyze Clickstream data from S3 using Apache Spark and Hive to deliver more effective ads</li>
+</ul>
+</li>
+</ul>
+<p>只读副本可以轻松弹性扩展，超越单个数据库实例的容量限制，以处理读取繁重的数据库工作负载。为审计目的创建只读副本是多余的。此外，问题提到should have their own copy of the database, which is not possible with replicas. (通过<strong>Create an encrypted snapshot of the database可以解决</strong>)</p>
+<p>Data &amp; Analytics</p>
+<ul>
+<li>Kinesis:<ul>
+<li>处理（从provider捕获、传给别的消费者存储）实时流数据，其中谁传输，谁分析见下：</li>
+<li>Kinesis Data Streams用于实时数据流传输</li>
+<li>Kinesis Data Analytics用于使用SQL&#x2F;Flink分析数据流</li>
+<li>kinesis Data Firehose</li>
+</ul>
+</li>
+<li>OpenSearch:<ul>
+<li>（前身是ElasticSearch）见课程笔记</li>
+</ul>
+</li>
+<li>QuickSight:  提供的一种云端商业智能(BI)服务,旨在让任何人都能轻松构建可视化分析、执行临时分析并从数据中快速获得业务洞见。</li>
+<li>Athena ：  用SQL在S3中查数据</li>
+</ul>
+<p>Migration</p>
+<ul>
+<li>Snow Family</li>
+<li>Storage Gateway</li>
+<li>Data Sync</li>
+</ul>
+<p>Network &amp; Content Delivering</p>
+<ul>
+<li>API Gateway：  后端服务的前门，提供无状态的Rest API 和 有状态的Websocket API。</li>
+<li>Route 53:  存DNS记录（映射域名到IP地址）<ul>
+<li>在private hosted zone 要开启dns resolution，来让DNS解析。</li>
+</ul>
+</li>
+<li>Cloud Front  在边缘缓存</li>
+<li>Global Accelerator: 导航到最近路由</li>
+<li>Direct Connect vs  site-to-site VPN</li>
+<li>DataSync</li>
+</ul>
+<p>Application Integration</p>
+<ul>
+<li>SQS :  当一个应用给另一个应用传输数据，为了不让两个应用直接耦合， 可以将数据通过SQS传递</li>
+<li>SNS： 发布者向SNS发布消息，所有订阅者收到消息。</li>
+</ul>
+<p>Management &amp; Governance</p>
+<ul>
+<li>CloudWatch：监测异常行为</li>
+<li>CloudTrail：记录用户的所有动作，可以导入到CloudWatch来进行分析</li>
+</ul>
+<p>一个基本概念，RDBMS(关系型数据库)与Nosql:  Nosql数据库可以用来存那些数据结构更灵活的数据，比如JSON,键值对  当然我对这里理解还不是很深刻，比如具体到怎样的数据，可以实践操作用一下MongoDB DynamoDB</p>
+<p>关于<strong>”serverless”</strong>这个词，我的理解是，serverless是由云端完全托管的的，无服务器。</p>
+<p>比如 Serverless DB:</p>
+<ul>
+<li>Aurora</li>
+<li>Dynamo DB</li>
+</ul>
+<p>这些数据库服务由AWS完全托管和自动扩缩容,开发者无需管理任何底层实例,只需通过API访问,并按实际使用量付费。</p>
+<p>传统托管数据库：</p>
+<ul>
+<li>RDS： 包括MySQL、PostgreSQL、Oracle、SQL Server等多种关系型数据库引擎。</li>
+<li>ElastiCache:  内存数据库服务,支持Redis和Memcached。</li>
+</ul>
+<p>这些数据库服务虽然由AWS管理底层基础设施,但开发者仍需自行配置和管理数据库实例,并按实例规格付费。</p>
+<ul>
+<li><strong>latency routing policy</strong><ul>
+<li>由于欧洲客户面临应用程序加载时间较长的性能问题，因此您可以使用基于延迟的路由来减少延迟。因此这是正确的选择。 注意：Geo-Proximity无法减少延迟！</li>
+<li>什么是延迟？<ul>
+<li>延迟(Latency)指的是从发送请求到收到响应之间的时间延迟。它包括网络延迟(数据在网络上传输的时间)和服务延迟(资源处理请求的时间)两个部分。地理位置亲和性路由只能优化网络延迟部分。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>所以注意 “延迟” 和 “地理位置更近” 没有必然联系。</p>
+<p>读题注意：</p>
+<p>要注意“希望在上线前提高应用程序的可用性” 这里就说明要用multi-AZ而非read replica</p>
+<h3 id="关于网络的一些总结汇合"><a href="#关于网络的一些总结汇合" class="headerlink" title="关于网络的一些总结汇合"></a>关于网络的一些总结汇合</h3><p>VPC：</p>
+<ul>
+<li>可定义IP地址范围、子网、路由表、网络ACL等</li>
+</ul>
+<p>Internet Gateway:</p>
+<ul>
+<li>允许VPC内资源访问互联网</li>
+<li>仅适用于公有子网</li>
+</ul>
+<p>NAT Gateway:</p>
+<ul>
+<li>允许私有子网内资源访问互联网</li>
+<li>不支持入站连接</li>
+</ul>
+<p>NAT(Network Address Translation)</p>
+<ul>
+<li>NAT最初是用于解决IPv4地址耗尽的问题,通过让多个私有IP地址共享一个公网IP地址访问互联网。</li>
+<li>NAT不仅可以转换IP地址,还可以转换端口号(PAT - Port Address Translation),使多个内部主机可以使用同一个公网IP地址。</li>
+</ul>
+<p>VPC Peering:</p>
+<ul>
+<li>连接两个VPC,使其中资源可以使用私有IP通信</li>
+<li>常用于同账户或跨账户VPC互联</li>
+</ul>
+<p>VPC Endpoints:</p>
+<ul>
+<li>通过AWS PrivateLink提供对AWS服务的私密访问</li>
+<li>Interface Endpoint:<ul>
+<li>AWS会在指定的VPC子网中为终端节点创建一个或多个弹性网络接口(ENI)(ENI是AWS VPC中的一种虚拟网络接口)  ,并从子网IP地址范围分配私有IP地址。</li>
+<li>这些ENI作为流量的入口点,VPC内部资源可以使用分配的私有IP地址通过接口终端节点访问相应的AWS服务。</li>
+<li>接口终端节点使用AWS PrivateLink技术,确保VPC与AWS服务之间的流量不会离开AWS网络。</li>
+</ul>
+</li>
+<li>Gateway Endpoint:<ul>
+<li>与接口终端节点不同,网关终端节点是一种通过路由表将流量路由到AWS服务(如S3和DynamoDB)的方式,不使用PrivateLink技术。网关终端节点更简单,但功能也更有限。</li>
+</ul>
+</li>
+</ul>
+<p>VPC：</p>
+<ul>
+<li>Transit VPC</li>
+<li>Transit Gateway</li>
+</ul>
+<p>VPN CloudHub:</p>
+<ul>
+<li>它使用一个虚拟私有网关(Virtual Private Gateway)作为中心枢纽,多个客户网关(Customer Gateway)代表远程站点连接到该枢纽。</li>
+</ul>
+<ol>
+<li>虚拟私有网关收集并重新广播所有路由信息,使得每个远程站点都可以与其他站点通信。</li>
+</ol>
+<p>site-to-site VPN 和 Dirrect Connect是一组概念（不同的本地与AWS连接的方式）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://anne-aaa.github.io/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" data-id="clxbzu2jl00008npo41trenxb" data-title="AWS SAA知识点联合" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AWS/" rel="tag">AWS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-backend/架构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/05/24/backend/%E6%9E%B6%E6%9E%84/" class="article-date">
@@ -489,7 +739,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" rel="tag">日常记录</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AWS/" rel="tag">AWS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" rel="tag">日常记录</a></li></ul>
     </div>
   </div>
 
@@ -499,7 +749,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 20px;">后端</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">日常记录</a>
+      <a href="/tags/AWS/" style="font-size: 10px;">AWS</a> <a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 10px;">前端</a> <a href="/tags/%E5%90%8E%E7%AB%AF/" style="font-size: 20px;">后端</a> <a href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">日常记录</a>
     </div>
   </div>
 
@@ -508,7 +758,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">June 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li></ul>
     </div>
   </div>
 
@@ -519,6 +769,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/">AWS SAA知识点联合</a>
+          </li>
         
           <li>
             <a href="/2024/05/24/backend/%E6%9E%B6%E6%9E%84/">架构</a>
