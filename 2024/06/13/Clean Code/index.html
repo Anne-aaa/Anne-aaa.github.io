@@ -4,22 +4,20 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo+ Github搭建一个个人博客 | Anne&#39;s Blog</title>
+  <title>Clean Code | Anne&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="一. 搭建流程详情见：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;21193762 关于搭建的流程。再参考一些别的综合一下。 具体原理是，可以建立master和hexo两个分支，hexo分支用来存放hexo init出来的服务器，master是hexo的静态文件生成后部署到的分支。这样，即使换电脑，也可以继续把代码拉下来，继续用hexo写博客。 二. 过程中遇到的问题电脑是mac">
+  <meta name="description" content="第二章 有意义的命名 有意义的区分 避免冗余 使用读的出来的名称（而非自造词）  第三章 函数 每个函数一个抽象层级 函数参数应尽可能少，否则测试的参数难写。  第四章 注释 几种可行的注释  TODO注释 12&#x2F;&#x2F; TODO: These are not needed&#x2F;&#x2F; We expect this to go away when we do the checkout model  放大某种看">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo+ Github搭建一个个人博客">
-<meta property="og:url" content="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="Clean Code">
+<meta property="og:url" content="https://anne-aaa.github.io/2024/06/13/Clean%20Code/index.html">
 <meta property="og:site_name" content="Anne&#39;s Blog">
-<meta property="og:description" content="一. 搭建流程详情见：https:&#x2F;&#x2F;www.zhihu.com&#x2F;question&#x2F;21193762 关于搭建的流程。再参考一些别的综合一下。 具体原理是，可以建立master和hexo两个分支，hexo分支用来存放hexo init出来的服务器，master是hexo的静态文件生成后部署到的分支。这样，即使换电脑，也可以继续把代码拉下来，继续用hexo写博客。 二. 过程中遇到的问题电脑是mac">
+<meta property="og:description" content="第二章 有意义的命名 有意义的区分 避免冗余 使用读的出来的名称（而非自造词）  第三章 函数 每个函数一个抽象层级 函数参数应尽可能少，否则测试的参数难写。  第四章 注释 几种可行的注释  TODO注释 12&#x2F;&#x2F; TODO: These are not needed&#x2F;&#x2F; We expect this to go away when we do the checkout model  放大某种看">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://anne-aaa.github.io/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">
-<meta property="article:published_time" content="2024-05-21T07:18:47.000Z">
-<meta property="article:modified_time" content="2024-05-24T07:57:37.445Z">
+<meta property="article:published_time" content="2024-06-13T12:34:23.577Z">
+<meta property="article:modified_time" content="2024-06-13T12:35:27.211Z">
 <meta property="article:author" content="Anne">
-<meta property="article:tag" content="日常记录">
+<meta property="article:tag" content="后端">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://anne-aaa.github.io/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80">
   
     <link rel="alternate" href="/atom.xml" title="Anne's Blog" type="application/atom+xml">
   
@@ -74,10 +72,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Hexo+ Github搭建一个个人博客" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Clean Code" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="article-date">
-  <time class="dt-published" datetime="2024-05-21T07:18:47.000Z" itemprop="datePublished">2024-05-21</time>
+    <a href="/2024/06/13/Clean%20Code/" class="article-date">
+  <time class="dt-published" datetime="2024-06-13T12:34:23.577Z" itemprop="datePublished">2024-06-13</time>
 </a>
     
   </div>
@@ -88,7 +86,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      Hexo+ Github搭建一个个人博客
+      Clean Code
     </h1>
   
 
@@ -96,26 +94,53 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="一-搭建流程"><a href="#一-搭建流程" class="headerlink" title="一. 搭建流程"></a>一. 搭建流程</h3><p>详情见：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21193762">https://www.zhihu.com/question/21193762</a> 关于搭建的流程。再参考一些别的综合一下。</p>
-<p>具体原理是，可以建立master和hexo两个分支，hexo分支用来存放hexo init出来的服务器，master是hexo的静态文件生成后部署到的分支。这样，即使换电脑，也可以继续把代码拉下来，继续用hexo写博客。</p>
-<h3 id="二-过程中遇到的问题"><a href="#二-过程中遇到的问题" class="headerlink" title="二. 过程中遇到的问题"></a>二. 过程中遇到的问题</h3><p>电脑是mac 系统是zshrc，环境变量文件是.zshrc</p>
-<p>环境变量最后一行写的是pnpm 所以我得用pnpm安装，才能识别到这个command</p>
-<h3 id="三-日常改动："><a href="#三-日常改动：" class="headerlink" title="三. 日常改动："></a>三. 日常改动：</h3><ol>
-<li>直接把.md文件复制到source&#x2F;_post文件夹中，复制完之后然后使用文本编辑器打开它，在第一行加上title。 也可以直接 hexo new 一篇博客。 图片放在source&#x2F;images文件夹中，md文档内，使用<img src="/%E5%9B%BE%E7%89%87%E9%93%BE%E6%8E%A5%E5%9C%B0%E5%9D%80" alt="图片" title="图片title">的格式，圆括号内的链接地址写(&#x2F;images&#x2F;name.jpeg)。<br>这里的 &#x2F; 指的是根目录，对于hexo，资源文件的根目录就是source。</li>
-<li>在.git目录下，依次执行git add .、git commit -m “…”、git push origin hexo指令将改动推送到GitHub（此时当前分支应为hexo</li>
-<li>要进入hexo跟目录（和_config.yml同一目录下），删除旧的静态文件，即 public 文件<br>hexo clean。 然后才执行 hexo d -g 生成静态文件并部署到远程服务器,到master分支上。 需要等待一会才能见到。<br>hexo s可以先在本地预览。</li>
+        <h3 id="第二章-有意义的命名"><a href="#第二章-有意义的命名" class="headerlink" title="第二章 有意义的命名"></a>第二章 有意义的命名</h3><ol>
+<li>有意义的区分</li>
+<li>避免冗余</li>
+<li>使用读的出来的名称（而非自造词）</li>
 </ol>
-<p>注意问题1.</p>
-<p>如果你在运行<code>hexo</code>命令时出现了<code>Usage</code>提示而无法执行后面的子命令, 很可能是因为你当前所在的目录不是 Hexo 站点的根目录。Hexo 需要在站点根目录下才能正确执行命令。</p>
+<h3 id="第三章-函数"><a href="#第三章-函数" class="headerlink" title="第三章 函数"></a>第三章 函数</h3><ol>
+<li>每个函数一个抽象层级</li>
+<li>函数参数应尽可能少，否则测试的参数难写。</li>
+</ol>
+<h3 id="第四章-注释"><a href="#第四章-注释" class="headerlink" title="第四章 注释"></a>第四章 注释</h3><ol>
+<li>几种可行的注释</li>
+</ol>
+<p>TODO注释</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">TODO:</span> These are not needed</span></span><br><span class="line"><span class="comment">// We expect this to go away when we do the checkout model</span></span><br></pre></td></tr></table></figure>
 
+<p>放大某种看起来不合理之物的重要性</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">String</span> listItemContent = match.<span class="title function_">group</span>(<span class="number">3</span>).<span class="title function_">trim</span>();</span><br><span class="line"><span class="comment">// the trim is real important. It removes the starting</span></span><br><span class="line"><span class="comment">// spaves that could cause the item to be recognized</span></span><br><span class="line"><span class="comment">// as another list</span></span><br></pre></td></tr></table></figure>
+
+<p>警示</p>
+<p>对意图的解释</p>
+<ol>
+<li>直接把代码注释掉会让别人觉得依然放在那里可能很重要。</li>
+</ol>
+<h3 id="第五章-格式"><a href="#第五章-格式" class="headerlink" title="第五章 格式"></a>第五章 格式</h3><ol>
+<li>垂直方向上的区隔：<ul>
+<li>封包声明、导入声明和每个函数间都有空白行隔开。 每个空白行是一条线索，标示出新的独立概念。</li>
+<li>被调用的函数应该放在执行调用的函数下面</li>
+</ul>
+</li>
+<li>横向格式：<ul>
+<li>空格字符： 乘法因子间没有空格，因为乘法具有较高优先级。加减法用空格隔开，因为优先级低。<ul>
+<li>赋值操作符周围加上空格，达到强调目的。</li>
+<li>函数调用括号中的参数一一隔开，表示参数是互相分离的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="第九章-单元测试"><a href="#第九章-单元测试" class="headerlink" title="第九章 单元测试"></a>第九章 单元测试</h3>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="clxd8u3s70000zbpoaah982zl" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/06/13/Clean%20Code/" data-id="clxd8u3sk0003zbpodopmcu41" data-title="Clean Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%B8%B8%E8%AE%B0%E5%BD%95/" rel="tag">日常记录</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li></ul>
 
     </footer>
   </div>
@@ -123,19 +148,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2024/05/24/backend/%E6%9E%B6%E6%9E%84/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          架构
-        
-      </div>
-    </a>
   
-  
-    <a href="/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">前端项目中遇到的问题</div>
+      <div class="article-nav-title">AWS SAA知识点联合</div>
     </a>
   
 </nav>

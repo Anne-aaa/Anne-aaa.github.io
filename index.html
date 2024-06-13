@@ -71,6 +71,84 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Clean Code" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/13/Clean%20Code/" class="article-date">
+  <time class="dt-published" datetime="2024-06-13T12:34:23.577Z" itemprop="datePublished">2024-06-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/13/Clean%20Code/">Clean Code</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h3 id="第二章-有意义的命名"><a href="#第二章-有意义的命名" class="headerlink" title="第二章 有意义的命名"></a>第二章 有意义的命名</h3><ol>
+<li>有意义的区分</li>
+<li>避免冗余</li>
+<li>使用读的出来的名称（而非自造词）</li>
+</ol>
+<h3 id="第三章-函数"><a href="#第三章-函数" class="headerlink" title="第三章 函数"></a>第三章 函数</h3><ol>
+<li>每个函数一个抽象层级</li>
+<li>函数参数应尽可能少，否则测试的参数难写。</li>
+</ol>
+<h3 id="第四章-注释"><a href="#第四章-注释" class="headerlink" title="第四章 注释"></a>第四章 注释</h3><ol>
+<li>几种可行的注释</li>
+</ol>
+<p>TODO注释</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">TODO:</span> These are not needed</span></span><br><span class="line"><span class="comment">// We expect this to go away when we do the checkout model</span></span><br></pre></td></tr></table></figure>
+
+<p>放大某种看起来不合理之物的重要性</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">String</span> listItemContent = match.<span class="title function_">group</span>(<span class="number">3</span>).<span class="title function_">trim</span>();</span><br><span class="line"><span class="comment">// the trim is real important. It removes the starting</span></span><br><span class="line"><span class="comment">// spaves that could cause the item to be recognized</span></span><br><span class="line"><span class="comment">// as another list</span></span><br></pre></td></tr></table></figure>
+
+<p>警示</p>
+<p>对意图的解释</p>
+<ol>
+<li>直接把代码注释掉会让别人觉得依然放在那里可能很重要。</li>
+</ol>
+<h3 id="第五章-格式"><a href="#第五章-格式" class="headerlink" title="第五章 格式"></a>第五章 格式</h3><ol>
+<li>垂直方向上的区隔：<ul>
+<li>封包声明、导入声明和每个函数间都有空白行隔开。 每个空白行是一条线索，标示出新的独立概念。</li>
+<li>被调用的函数应该放在执行调用的函数下面</li>
+</ul>
+</li>
+<li>横向格式：<ul>
+<li>空格字符： 乘法因子间没有空格，因为乘法具有较高优先级。加减法用空格隔开，因为优先级低。<ul>
+<li>赋值操作符周围加上空格，达到强调目的。</li>
+<li>函数调用括号中的参数一一隔开，表示参数是互相分离的。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="第九章-单元测试"><a href="#第九章-单元测试" class="headerlink" title="第九章 单元测试"></a>第九章 单元测试</h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://anne-aaa.github.io/2024/06/13/Clean%20Code/" data-id="clxd8u3sk0003zbpodopmcu41" data-title="Clean Code" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%90%8E%E7%AB%AF/" rel="tag">后端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-backend/AWS SAA知识点联合" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" class="article-date">
@@ -307,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" data-id="clxbzu2jl00008npo41trenxb" data-title="AWS SAA知识点联合" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/" data-id="clxd8u3sm0004zbpoarggbx0a" data-title="AWS SAA知识点联合" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -428,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/24/backend/%E6%9E%B6%E6%9E%84/" data-id="clxbzt3jo00096xpo9e5r3ks7" data-title="架构" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/24/backend/%E6%9E%B6%E6%9E%84/" data-id="clxd8u3sw000fzbpo4isj34c2" data-title="架构" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -479,7 +557,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="clxbzt3jg00016xpo1pvpf9sa" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/Hexo+%20Github%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" data-id="clxd8u3s70000zbpoaah982zl" data-title="Hexo+ Github搭建一个个人博客" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -562,7 +640,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-id="clxbzt3ja00006xpo0thh9u5f" data-title="前端项目中遇到的问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" data-id="clxd8u3sg0001zbpo14u7h01j" data-title="前端项目中遇到的问题" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -712,7 +790,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://anne-aaa.github.io/2024/05/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="clxbzt3jj00036xpo7dr2ce1d" data-title="《Spring 4.x 企业应用开发实战》读书笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://anne-aaa.github.io/2024/05/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" data-id="clxd8u3sn0005zbpo45dad9ms" data-title="《Spring 4.x 企业应用开发实战》读书笔记" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -771,6 +849,10 @@
       <ul>
         
           <li>
+            <a href="/2024/06/13/Clean%20Code/">Clean Code</a>
+          </li>
+        
+          <li>
             <a href="/2024/06/12/backend/AWS%20SAA%E7%9F%A5%E8%AF%86%E7%82%B9%E8%81%94%E5%90%88/">AWS SAA知识点联合</a>
           </li>
         
@@ -784,10 +866,6 @@
         
           <li>
             <a href="/2024/05/21/%E7%AC%AC%E4%B8%80%E6%AC%A1%E5%81%9A%E5%89%8D%E7%AB%AF%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">前端项目中遇到的问题</a>
-          </li>
-        
-          <li>
-            <a href="/2024/05/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">《Spring 4.x 企业应用开发实战》读书笔记</a>
           </li>
         
       </ul>
